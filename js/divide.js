@@ -10,18 +10,28 @@ const correctSound = new Audio("./sounds/correct.mp3");
 let answer = 0;
 
 // functions
-add();
-function add() {
-  const random_number1 = Math.floor(Math.random() * 20);
-  const random_number2 = Math.floor(Math.random() * 20);
-  answer = random_number1 + random_number2;
+divide();
+function divide() {
+  const random_number1 = Math.floor(Math.random() * 10);
+  const random_number2 = Math.floor(Math.random() * 10);
+  if (random_number1 < random_number2 || random_number2 == 0) {
+    return divide();
+  }
+  let dividedNmuber = random_number1 / random_number2;
+  let formatedNumber = dividedNmuber.toFixed(1);
+
+  if (Number.isInteger(dividedNmuber)) {
+    answer = dividedNmuber;
+  } else {
+    answer = formatedNumber;
+  }
 
   number1.textContent = random_number1;
   number2.textContent = random_number2;
 
-  option1.textContent = Math.floor(Math.random() * 20);
-  option2.textContent = Math.floor(Math.random() * 20);
-  option3.textContent = Math.floor(Math.random() * 20);
+  option1.textContent = Math.floor(Math.random() * 10);
+  option2.textContent = Math.floor(Math.random() * 10);
+  option3.textContent = Math.floor(Math.random() * 10);
 
   options[Math.floor(Math.random() * options.length)].textContent = answer;
 
@@ -33,7 +43,7 @@ function add() {
 function allOptions(e) {
   if (e.target.textContent == answer) {
     correctSound.play();
-    add();
+    divide();
   } else {
     wrongSound.play();
     e.preventDefault();

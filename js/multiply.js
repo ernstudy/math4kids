@@ -10,18 +10,22 @@ const correctSound = new Audio("./sounds/correct.mp3");
 let answer = 0;
 
 // functions
-add();
-function add() {
-  const random_number1 = Math.floor(Math.random() * 20);
-  const random_number2 = Math.floor(Math.random() * 20);
-  answer = random_number1 + random_number2;
+multiply();
+function multiply() {
+  const random_number1 = Math.floor(Math.random() * 10);
+  const random_number2 = Math.floor(Math.random() * 10);
+  answer = random_number1 * random_number2;
+
+  if (random_number1 == 0) {
+    return multiply();
+  }
 
   number1.textContent = random_number1;
   number2.textContent = random_number2;
 
-  option1.textContent = Math.floor(Math.random() * 20);
-  option2.textContent = Math.floor(Math.random() * 20);
-  option3.textContent = Math.floor(Math.random() * 20);
+  option1.textContent = Math.floor(Math.random() * 10);
+  option2.textContent = Math.floor(Math.random() * 10);
+  option3.textContent = Math.floor(Math.random() * 10);
 
   options[Math.floor(Math.random() * options.length)].textContent = answer;
 
@@ -33,7 +37,7 @@ function add() {
 function allOptions(e) {
   if (e.target.textContent == answer) {
     correctSound.play();
-    add();
+    multiply();
   } else {
     wrongSound.play();
     e.preventDefault();

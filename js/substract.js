@@ -10,12 +10,15 @@ const correctSound = new Audio("./sounds/correct.mp3");
 let answer = 0;
 
 // functions
-add();
-function add() {
+substract();
+function substract() {
   const random_number1 = Math.floor(Math.random() * 20);
   const random_number2 = Math.floor(Math.random() * 20);
-  answer = random_number1 + random_number2;
+  answer = random_number1 - random_number2;
 
+  if (random_number1 < random_number2) {
+    return substract();
+  }
   number1.textContent = random_number1;
   number2.textContent = random_number2;
 
@@ -33,7 +36,7 @@ function add() {
 function allOptions(e) {
   if (e.target.textContent == answer) {
     correctSound.play();
-    add();
+    substract();
   } else {
     wrongSound.play();
     e.preventDefault();
